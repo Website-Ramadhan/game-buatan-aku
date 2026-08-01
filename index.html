@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>website permainan ku </title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: sans-serif;
+      background-color: #0f172a;
+      color: white;
+      text-align: center;
+    }
+
+    /* 1. NAVBAR / MEGA MENU (BAGIAN ATAS) */
+    .navbar {
+      background-color: #1e293b;
+      padding: 10px;
+      border-bottom: 2px solid #2563eb;
+    }
+
+    .menu-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #38bdf8;
+      margin-bottom: 10px;
+    }
+
+    .mega-menu-content {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-shop {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* 2. AREA GAME SIMULATOR (BAGIAN BAWAH) */
+    .game-area {
+      margin-top: 30px;
+      padding: 20px;
+    }
+
+    .character {
+      width: 60px;
+      height: 60px;
+      background-color: #38bdf8;
+      border-radius: 50%;
+      margin: 20px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #000;
+      box-shadow: 0 0 15px #38bdf8;
+      transition: all 0.2s ease;
+    }
+
+    .controls {
+      margin-top: 20px;
+    }
+
+    .btn-control {
+      background-color: #334155;
+      color: white;
+      border: 1px solid #475569;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MEGA MENU & TOKO SHOP -->
+  <div class="navbar">
+    <div class="menu-title">🎮 MEGA MENU SHOP</div>
+    <div class="mega-menu-content">
+      <button class="btn-shop" onclick="beliItem('Pedang Laser')">⚔️ Pedang (20 Koin)</button>
+      <button class="btn-shop" onclick="beliItem('Perisai')">🛡️ Perisai (30 Koin)</button>
+      <button class="btn-shop" onclick="klaimBonus()" style="background-color: #16a34a;">🎁 Bonus +20 Koin</button>
+    </div>
+  </div>
+
+  <!-- LAYAR GAME SIMULATOR -->
+  <div class="game-area">
+    <h2>STATUS GAME</h2>
+    <h3 id="koin-text" style="color: #facc15; margin-top: 10px;">Koin Kamu: 100</h3>
+    <p id="item-text" style="color: #94a3b8; margin-top: 5px;">Item Dimiliki: Tidak ada</p>
+
+    <!-- Karakter Game -->
+    <div id="player" class="character">HERO</div>
+
+    <!-- Kontrol Game -->
+    <div class="controls">
+      <p>Gerakkan Karakter:</p>
+      <button class="btn-control" onclick="gerak('kiri')">⬅️ Kiri</button>
+      <button class="btn-control" onclick="gerak('kanan')">Kanan ➡️</button>
+    </div>
+  </div>
+
+  <!-- SCRIPT LOGIKA GAME -->
+  <script>
+    let koin = 100;
+    let posX = 0;
+
+    function updateUI() {
+      document.getElementById('koin-text').innerText = 'Koin Kamu: ' + koin;
+    }
+
+    function beliItem(namaItem) {
+      if (koin >= 10) {
+        koin -= 10;
+        updateUI();
+        document.getElementById('item-text').innerText = 'Item Dimiliki: ' + namaItem;
+        alert('Berhasil membeli ' + namaItem + '!');
+      } else {
+        alert('Koin tidak cukup!');
+      }
+    }
+
+    function klaimBonus() {
+      koin += 50;
+      updateUI();
+      alert('Selamat! Bonus +50 Koin ditambahkan.');
+    }
+
+    function gerak(arah) {
+      let player = document.getElementById('player');
+      if (arah === 'kiri') posX -= 30;
+      if (arah === 'kanan') posX += 30;
+      player.style.transform = 'translateX(' + posX + 'px)';
+    }
+  </script>
+
+</body>
+</html>
